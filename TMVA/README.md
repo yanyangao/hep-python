@@ -6,22 +6,20 @@ https://root.cern.ch/download/doc/tmva/TMVAUsersGuide.pdf
 
 # Script to training a simple Sig/Bkg classifier in TMVA
 
-`python3 simple_train_event_bdt.py`
+`python3 train_LJjet1_BDT.pys
 
-- This script gives a simple example of a signal/background classifier (BDT) using the signal and background files in the inputs/ directory
-Training process depends on the complexity of the training, e.g. the nubmer of variables and the specs in the nodes etc.
+- This example script trains a BDT classifer to distinguish displaced jets from dark photons from prompt jets from Wjets processes 
+- Training process depends on the complexity of the training, e.g. the nubmer of variables and the specs in the nodes etc.
 This example should take no more than 5 minutes
+- After training a directory `LJjet1_BDT_data` will be created where inside, you can find the trained weight file to be used to apply the trained algorithm to any data `LJjet1_BDT_data/weights/TMVAClassification_BoostType=BDTG.weights.xml' 
+- You should always inspect the training performance after each training, the easiest is to use the built in TMVAGui (Guide section 2.6), with a root terminal do `TMVA::TMVAGui("lj_bdt.root")`. This can display information such as overla
 
-- After training a directory `eventBDT_data` will be created where inside, you can find the trained weight file to be used to apply the trained algorithm to any data `eventBDT_data/weights/TMVAClassification_BoostType=BDTG.weights.xml' 
-
-- You should always inspect the training performance after each training, the easiest is to use the built in TMVAGui (Guide section 2.6), with a root terminal do `TMVA::TMVAGui("simple_event_bdt.root")`. This can display information such as overla
-
-- There is a similar code to train a BDT based jet classifier to distinguish displaced jet from the prompt jet `train_LJjet1_BDT.py`
+- There is a similar code to train a BDT based jet classifier to distinguish VBF signal and QCD background using leading jet kinematics `simple_train_event_bdt.py` 
 
 # Scripts to apply existing training (aka weights) to any file
 
 
-`python3 apply_event_bdt.py -t miniT -i input.root -o outputDir/ -w eventBDT_data/weights/TMVAClassification_BoostType=BDTG.weights.xml
+`python3 apply_event_bdt.py -t miniT -i input.root -o outputDir/ -w LJjet1_DT_data/weights/TMVAClassification_BoostType=BDTG.weights.xml
 '
 
 Description: Applies the weights of the trained event-level BDT classifier to 
