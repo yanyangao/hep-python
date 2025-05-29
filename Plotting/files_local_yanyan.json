@@ -1,0 +1,61 @@
+{
+    "files": {
+       "Data": {
+            "sampletype": "data",
+            "filepath": "/Users/ygao3/atlas_data/DarkPhoton/data/miniT/vbfskim/v02-00/data_run2.root",
+            "treename": "miniT",
+            "colour": "2",
+            "blind": "False",
+            "scalefactor": 1, 
+            "unitynorm": "True",
+            "includeweights": "scale1fb*intLumi",
+            "excludeweights": ""
+        },
+       "QCD": {
+            "sampletype": "background",
+            "filepath": "/Users/ygao3/atlas_data/DarkPhoton/data/miniT/vbfskim/v02-00/qcd.root",
+            "treename": "miniT",
+            "colour": "2",
+            "blind": "False",
+            "scalefactor": 1, 
+            "unitynorm": "True",
+            "includeweights": "scale1fb*intLumi",
+            "excludeweights": ""
+        },
+      "Sig: 0.1 GeV": {
+            "sampletype": "signal",
+            "filepath": "/Users/ygao3/atlas_data/DarkPhoton/data/miniT/vbfskim/v02-00/frvz_vbf_500757.root",
+            "treename": "miniT",
+            "colour": "6",
+            "blind": "False",
+            "unitynorm": "True",
+            "scalefactor": 1,
+            "includeweights": "scale1fb*intLumi",
+            "excludeweights": ""
+      },
+        "Sig: 0.4 GeV": {
+            "sampletype": "signal",
+            "filepath": "/Users/ygao3/atlas_data/DarkPhoton/data/miniT/vbfskim/v02-00/frvz_vbf_500758.root",
+            "treename": "miniT",
+            "colour": "2",
+            "blind": "False",
+            "unitynorm": "True",
+            "scalefactor": 1,
+            "includeweights": "scale1fb*intLumi",
+            "excludeweights": ""
+        },
+        "Sig: 15 GeV": {
+            "sampletype": "signal",
+            "filepath": "/Users/ygao3/atlas_data/DarkPhoton/data/miniT/vbfskim/v02-00/frvz_vbf_500764.root",
+            "treename": "miniT",
+            "colour": "3",
+            "blind": "False",
+            "unitynorm": "True",
+            "scalefactor": 1,
+            "includeweights": "scale1fb*intLumi",
+            "excludeweights": ""
+        }
+ 
+
+    }
+}

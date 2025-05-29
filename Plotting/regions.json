@@ -1,0 +1,55 @@
+{
+    "regions": {
+
+      "vbffilter": {
+         "cuts": "(njet30>1) * (njet30<4) * (mjj>900e3) * (detajj>3)",
+            "blinding_cuts": "",
+            "blind": "True",
+            "forcebins": "",
+            "bkgerrors": ""
+        },            
+       "mettrigger": {
+         "cuts": "(metTrig==1) * (mjj>1200e3&&jet1_pt>150e3&&jet2_pt>80e3&&abs(dphijj)>2.5)  * (nLJmus20==0&&MET>200e3)", 
+            "blinding_cuts": "", 
+            "blind": "False",
+            "forcebins": "",
+            "bkgerrors": ""
+        },            
+        "mudpjqcd": {
+         "cuts": "(nLJjets20==0) * (nLJmus20>0) * (muDPJTrig==1) * (mjj>1e6) *(nmuSignal==0) * (neleSignal==0) * (hasBjet==0)  * (MET<80e3)",
+            "blinding_cuts": "", 
+            "blind": "False",
+            "forcebins": "",
+            "bkgerrors": ""
+        },            
+        "mudpjloose": {
+         "cuts": "(nLJjets20==0)  * (MET>80e3) * (mjj>1e6) *(nmuSignal==0) * (neleSignal==0) * (hasBjet==0)",
+            "blinding_cuts": "", 
+            "blind": "False",
+            "forcebins": "",
+            "bkgerrors": ""
+        },            
+        "mudpjpresel": {
+         "cuts": "(nLJmus20>0) * (muDPJTrig==1)* (nLJjets20==0)  * (MET>80e3) * (mjj>1e6) *(nmuSignal==0) * (neleSignal==0) * (hasBjet==0)", 
+            "blinding_cuts": "", 
+            "blind": "False",
+            "forcebins": "",
+            "bkgerrors": ""
+        },            
+        "hdpjpresel": {
+         "cuts": "(metTrig) * (MET>200e3) * (nmuSignal==0) * (neleSignal==0) * (hasBjet==0) * (min_dphi_jetmet>0.4) * (nLJmus20==0) * (nLJjets20>=1)  * (LJjet1_gapRatio>0.9)  * (LJjet1_BIBtagger>0.2) * (LJjet1_DPJtagger>0.5) * (dsid!=364702)", 
+            "blinding_cuts": "", 
+            "blind": "False",
+            "forcebins": "",
+            "bkgerrors": ""
+        },
+       "WenuCR": {
+         "cuts": "(metTrig==1) * (MET>225e3) * (neleSignal==1) * (hasBjet==0) * (nmuSignal==0) * (nLJmus20==0) * (nLJjets20>=1)  * (LJjet1_gapRatio>0.9)  * (LJjet1_BIBtagger>0.2) * (LJjet1_DPJtagger>0.2) *  (LJjet1_DPJtagger<0.5)", 
+            "blinding_cuts": "", 
+            "blind": "False",
+            "forcebins": "",
+            "bkgerrors": ""
+        }
+
+    }
+}            
