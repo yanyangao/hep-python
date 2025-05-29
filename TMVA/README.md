@@ -30,7 +30,7 @@ as a new branch and save as the same name but in a new outputDir
 # Analysis level ROC curve 
 
 Once you have applied the trained weights to your chosen signal and background data, you can use this example scripts to evaluate the performance of the new classifier.
-This is not the same as the intrinsic ROC curve given in the training. As this would be evaluated on different events and will take account into potentially different selections, differnet MC weights.
+This is not the same as the intrinsic ROC curve given in the training. As this would be evaluated on different events and will take account into potentially different selections, differnet MC weights
 
 `python3 get_roc_curve.py  -o output/`
 
