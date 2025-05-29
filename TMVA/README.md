@@ -6,7 +6,7 @@ https://root.cern.ch/download/doc/tmva/TMVAUsersGuide.pdf
 
 # Script to training a simple Sig/Bkg classifier in TMVA
 
-`python3 train_LJjet1_BDT.pys
+`python3 train_LJjet1_BDT.py`
 
 - This example script trains a BDT classifer to distinguish displaced jets from dark photons from prompt jets from Wjets processes 
 - Training process depends on the complexity of the training, e.g. the nubmer of variables and the specs in the nodes etc.
