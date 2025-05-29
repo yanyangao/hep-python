@@ -17,6 +17,8 @@ cd hep-python/
 git checkout branchname
 ```
 
+branchname is by default main
+
 ### Cutflow
 
 Based on existing ROOT TTrees, output nubmer of events after specified selections. 

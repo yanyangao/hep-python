@@ -16,6 +16,7 @@ This example should take no more than 5 minutes
 
 - You should always inspect the training performance after each training, the easiest is to use the built in TMVAGui (Guide section 2.6), with a root terminal do `TMVA::TMVAGui("simple_event_bdt.root")`. This can display information such as overla
 
+- There is a similar code to train a BDT based jet classifier to distinguish displaced jet from the prompt jet `train_LJjet1_BDT.py`
 
 # Scripts to apply existing training (aka weights) to any file
 

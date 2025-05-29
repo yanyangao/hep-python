@@ -55,20 +55,16 @@ def create_bdt(sigTree, bgdTree, out_file):
     #sigCut = TCut("1")
     #bgdCut = TCut("1")
 
-
-
     # setting both train signal and background samples to zero yields 50/50 data split. 
     # Number of events normalised TODO: this vs accounting for MC weights? ...
     #arglist = ":".join(["nTrain_Signal=0", "nTrain_Background=0", "SplitMode=Random", "NormMode=None", "!V"])
     # use 6000 signal events for training at least
-    arglist = ":".join(["nTrain_Signal=8000", "nTrain_Background=0", "SplitMode=Random", "NormMode=None", "!V"])
+    arglist = ":".join(["nTrain_Signal=0", "nTrain_Background=0", "SplitMode=Random", "NormMode=None", "!V"])
     dataloader.PrepareTrainingAndTestTree(sigCut, bgdCut, arglist)
 
-    #arglist = ":".join(["!H", "!V", "NTrees=1000:MinNodeSize=2.5%:BoostType=Grad:Shrinkage=0.10:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=2:PruneMethod=NoPruning"])
-    # setting suggested by Matt Needham for handling background with negative weights
-    #arglist = ":".join(["!H", "!V", "NTrees=100:MinNodeSize=1.5%:VarTransform=G,D:BoostType=Grad:Shrinkage=0.10:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=3"])
-    arglist = ":".join(["!H", "!V", "NTrees=100:MinNodeSize=1.5%:VarTransform=G,D:BoostType=Grad:Shrinkage=0.10:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=3"])
+    arglist = ":".join(["!H", "!V", "NTrees=1000:MinNodeSize=2.5%:BoostType=Grad:Shrinkage=0.10:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=2:PruneMethod=NoPruning"])
     method  = factory.BookMethod(dataloader, tmva.Types.kBDT, "BoostType=BDTG", arglist)
+
     factory.TrainAllMethods()
     factory.TestAllMethods()
     factory.EvaluateAllMethods()
@@ -77,8 +73,8 @@ def create_bdt(sigTree, bgdTree, out_file):
 
 # MAIN METHOD =======================================================================================================
 def main():
-    sigFilepath = "training_inputs/signal.root"
-    bgdFilepath = "training_inputs/vjets_strong.root"
+    sigFilepath = "/Users/ygao3/atlas_data/DarkPhoton/data/miniT/vbfskim/v02-00/frvz_vbf_500757.root"
+    bgdFilepath = "/Users/ygao3/atlas_data/DarkPhoton/data/miniT/vbfskim/v02-00/wjets_strong_sh227.root"
 
     sigTree, bgdTree, sigFile, bgdFile = get_trees(sigFilepath, bgdFilepath, "miniT")
 	

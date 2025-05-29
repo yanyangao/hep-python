@@ -53,6 +53,7 @@ def main():
     # These variables must match exactly what you used in the training
     reader = tmva.Reader()
 
+    '''
     local_mjj     = array('f', [0]); reader.AddVariable("mjj", local_mjj)
     local_dphijj  = array('f', [0]); reader.AddVariable("dphijj", local_dphijj)
     local_detajj  = array('f', [0]); reader.AddVariable("detajj", local_detajj)
@@ -60,6 +61,12 @@ def main():
     local_jet1_eta = array('f', [0]); reader.AddVariable("jet1_eta", local_jet1_eta)
     local_jet2_pt = array('f', [0]); reader.AddVariable("jet2_pt", local_jet2_pt)
     local_jet2_eta = array('f', [0]); reader.AddVariable("jet2_eta", local_jet2_eta)
+    '''
+    # Apply weights from train_LJjet1_BDT.py
+    local_LJjet1_jvt    = array('f', [0]); reader.AddVariable("LJjet1_jvt", local_LJjet1_jvt)
+    local_LJjet1_width    = array('f', [0]); reader.AddVariable("LJjet1_width", local_LJjet1_width)
+    local_LJjet1_EMfrac    = array('f', [0]); reader.AddVariable("LJjet1_EMfrac", local_LJjet1_EMfrac)
+    local_LJjet1_m    = array('f', [0]); reader.AddVariable("LJjet1_m", local_LJjet1_m)
 	
     reader.AddSpectator("scale1fb", array('f', [0]))	
     # make sure event_BDT matches the name in the weight
@@ -67,13 +74,15 @@ def main():
 
     bdt_response = array('f', [0])
     # define the BDT output branch, this does not need to be same as the method name
-    branch_name = 'VBF_BDT'
+    branch_name = 'LJjet1_BDT'
     bdt_branch = op_tree.Branch(branch_name,  bdt_response, branch_name+'/F')
 
     for entry in range(ip_tree.GetEntries()): 
         ip_tree.GetEntry(entry)
         op_tree.GetEntry(entry)
         #if entry > 5: continue
+        '''
+        # from  simple_train_event_bdt.py
         local_mjj[0]     = ip_tree.mjj
         local_dphijj[0]  = ip_tree.dphijj
         local_detajj[0]  = ip_tree.detajj
@@ -81,6 +90,12 @@ def main():
         local_jet1_eta[0] = ip_tree.jet1_eta
         local_jet2_pt[0] = ip_tree.jet2_pt
         local_jet2_eta[0] = ip_tree.jet2_eta
+        '''
+        # from train_LJjet1_BDT.py
+        local_LJjet1_jvt[0]     = ip_tree.LJjet1_jvt
+        local_LJjet1_width[0]   = ip_tree.LJjet1_width
+        local_LJjet1_EMfrac[0]  = ip_tree.LJjet1_EMfrac
+        local_LJjet1_m[0]       = ip_tree.LJjet1_m
         bdt_response[0] = reader.EvaluateMVA("BDTG")
         #print(ip_tree.eventNumber, local_mjj[0], local_dphijj[0], local_jet1_pt[0], local_jet2_pt[0], bdt_response[0])	
         op_tree.Fill()

@@ -2,7 +2,6 @@
     This script saves and compares ROC curves 
     Run by
         python3 roc_comparison.py  -o roc_output/
-Not fully working
 '''
 __author__ = "Yanyan Gao"
 __doc__ = ""
@@ -12,10 +11,10 @@ import numpy as np
 from ROOT import TMVA as tmva
 from ROOT import TFile, TTree, TH1F, TGraph, TCanvas, TLegend, kBlue, kRed, kBlack, kGreen
 from array import array
-import argparse
+import argparse, os
 
-sig_filename = "output/frvz_vbf_500757.root"
-bkg_filename = "output/qcd.root"
+sig_filename = "output_LJjet1_BDT/frvz_vbf_500757.root"
+bkg_filename = "output_LJjet1_BDT/qcd.root"
 
 def get_roc(x, y, sig_filename, bkg_filename, treename, cut_string, weight_string, variable_name, nBins, xMin, xMax, left_cut=False):
 
@@ -100,14 +99,14 @@ def main():
 
     treename = "miniT"
     weight_string = 'scale1fb'
-    cut_string = 'nLJjets>0&&LJjet1_pt>20e3&&LJjet1_gapRatio>0.9'
+    cut_string = 'nLJjets20>0&&LJjet1_pt>20e3&&LJjet1_gapRatio>0.9'
 
     # roc curve for two variables
     nbins = 200
-    var1 = 'VBF_BDT';  x1_min = -1;     x1_max = 1
+    var1 = 'LJjet1_DPJtagger';  x1_min = -1;     x1_max = 1
     x_var1, y_var1 = array( 'd' ), array( 'd' )
     get_roc(x_var1, y_var1, sig_filename, bkg_filename, treename, cut_string, weight_string, var1, nbins, x1_min, x1_max) 
-    var2 = 'dphijj';  x2_min = -3.2;     x2_max = 3.2
+    var2 = 'LJjet1_BDT';  x2_min = -1;     x2_max = 1
     x_var2, y_var2 = array( 'd' ), array( 'd' )
     get_roc(x_var2, y_var2, sig_filename, bkg_filename, treename, cut_string, weight_string, var2, nbins, x2_min, x2_max)
 
@@ -116,14 +115,14 @@ def main():
     os.system('mkdir -p ' + args.op_dir)
     op_tfile = TFile(args.op_dir +"/roc_curve.root", "recreate")
 
-    # create graph for LJjet1 BDT
+    # create graph for LJjet1 CNN 
     gr_var1 = TGraph( len(x_var1), x_var1, y_var1 )
-    setstyle(gr_var1, 'var1',  kBlack)
+    setstyle(gr_var1, var1,  kBlack)
     gr_var1.Write()
 
-    # create graph for LJjet1 CNN
+    # create graph for LJjet1 
     gr_var2 = TGraph( len(x_var2), x_var2, y_var2 )
-    setstyle(gr_var2, 'var2',  kRed)
+    setstyle(gr_var2, var2,  kRed)
     gr_var2.Write()
 
     # make overlay plots 
