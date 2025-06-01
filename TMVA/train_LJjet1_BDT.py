@@ -5,7 +5,6 @@
 '''
 
 # IMPORTS ===========================================================================================================
-import numpy as np
 from ROOT import TMVA as tmva
 from ROOT import TFile, TCut
 

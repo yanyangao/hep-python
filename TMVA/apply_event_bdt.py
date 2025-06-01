@@ -8,7 +8,6 @@ __doc__ = ""
 
 
 # IMPORTS ===========================================================================================================
-import numpy as np
 from ROOT import TMVA as tmva
 from ROOT import TFile, TTree
 from array import array
