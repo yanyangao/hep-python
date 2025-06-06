@@ -1,7 +1,12 @@
 '''
     Author: J Curran
     Description: example script for AD based training / testing 
-        Run: python3 train_LJjet1_AD.py 
+        Run: setupATLAS OR 
+             export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
+             source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh 
+             TRY LCG REL: 
+             lsetup "views LCG_107_swan x86_64-el9-gcc13-opt"
+             python3 train_LJjet1_AD.py 
 '''
 import uproot
 #from ROOT import TFile, TTree
@@ -78,7 +83,7 @@ class SimpleAE:
 
     def model_AE(self, input_shape, encoding_dim, hidden_nodes=None):
         #Inputs
-        inputArray = Input(shape=(input_shape))
+        inputArray = Input(shape=(input_shape,))
         x  = Dense(4, activation=tf.nn.leaky_relu)(inputArray)
         if hidden_nodes: 
             x  = Dense(hidden_nodes, activation=tf.nn.leaky_relu)(x)
@@ -235,12 +240,12 @@ def main():
     #Training + data prep 
     history, BasicAE, recon_test_data, mse_test_data, training_data, testing_data  = model_AE.train(enc_dim, epochs_, batch_size_)
     #Plot loss 
-    model_AE.plot_loss(history.history['loss'], history.history['val_loss'], 'log', name = None, save=False, ylim = False)
+    model_AE.plot_loss(history.history['loss'], history.history['val_loss'], 'log', name = None, save=True, ylim = False)
     #Get Signal Scores 
     mse_sig_scores = model_AE.mse_signals(BasicAE)
 
     #Plot Signal vs Background MSE 
-    model_AE.plot_mse(inp_scores=[mse_test_data]+mse_sig_scores, bins_size=0.1, scale='log', labels=['wjets', 'frvz_vbf_500757'], colours=['r', 'b', 'g'], name=None, xlim=None, save=False)
+    model_AE.plot_mse(inp_scores=[mse_test_data]+mse_sig_scores, bins_size=0.1, scale='log', labels=['wjets', 'frvz_vbf_500757'], colours=['r', 'b', 'g'], name=None, xlim=None, save=True)
     #Add branch to root file with train/test tag - BKG
     #Add branch to root file with train/test tag - SIG
     return 0 
