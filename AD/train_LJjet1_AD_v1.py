@@ -4,10 +4,11 @@
         Run: setupATLAS OR 
              export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
              source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh 
-             TRY LCG REL: 
+             Then TRY LCG REL: 
              lsetup "views LCG_107_swan x86_64-el9-gcc13-opt"
-             python3 train_LJjet1_AD.py 
+             python3 train_LJjet1_AD_v1.py 
 '''
+
 import uproot
 from ROOT import TFile, TTree, TObject
 import numpy as np
@@ -380,7 +381,7 @@ def main():
     bgdFile   = "wjets_strong_sh227.root"
     all_signals = ["frvz_vbf_500757.root"]
     enc_dim = 1 
-    epochs_ = 1
+    epochs_ = 5
     batch_size_ = 2000
 
     model_AE = SimpleAE(all_signals, sigFile, bgdFile, tree_name)
