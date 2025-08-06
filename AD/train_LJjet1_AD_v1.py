@@ -94,7 +94,7 @@ class SimpleAE:
         # Get normalised data - store evnt nums used in training/testing 
         evnt_nums, normed_data, track_evnts_data = self.normalise(file_tonorm)
         norm_input_data = np.hstack([track_evnts_data, normed_data])
-        train_LJjet1, test_LJjet1 = train_test_split(norm_input_data,random_state=64,test_size=.2, shuffle=True)
+        train_LJjet1, test_LJjet1 = train_test_split(norm_input_data,random_state=64,test_size=.5, shuffle=True)
         return train_LJjet1, test_LJjet1, track_evnts_data
 
     def model_AE(self, input_shape, encoding_dim, hidden_nodes=None):
@@ -297,7 +297,7 @@ class SimpleAE:
                 # Define new branches 
                 train_val = array("f", [0])
                 mse_val   = array("f", [0]) 
-                train_tag_branch = new_tree.Branch("isTrain", train_val, "isTrain/F")
+                train_tag_branch = new_tree.Branch("isTest", train_val, "isTest/F")
                 mse_tag_branch   = new_tree.Branch("mse", mse_val, "mse/F")
                 print(f"Tree entries {tree.GetEntries()}")
 
@@ -321,7 +321,7 @@ class SimpleAE:
 
         end2 = time.time()
         print(f"File creation took : {end2-end1}s")
-        return print(f"Cloned {self.bgd_filepath} to {output_name} and added the branches : isTrain, mse")
+        return print(f"Cloned {self.bgd_filepath} to {output_name} and added the branches : isTest, mse")
 
     def add_Branch_Sig(self, mse_score_sigs, output_name):
         """
@@ -351,7 +351,7 @@ class SimpleAE:
                 # Define new branches 
                 train_val = array('f', [0])
                 mse_val   = array('f', [0])
-                train_tag_branch = new_tree.Branch("isTrain", train_val, "isTrain/F")
+                train_tag_branch = new_tree.Branch("isTest", train_val, "isTest/F")
                 mse_tag_branch   = new_tree.Branch("mse", mse_val, "mse/F")
                 
                 print(f"Tree entries {tree.GetEntries()}")
@@ -373,7 +373,7 @@ class SimpleAE:
         # Close files
         output_file.Close()
         input_file.Close()
-        return print(f"Cloned {self.sig_filepath} to {output_name} and added the branches : isTrain, mse")
+        return print(f"Cloned {self.sig_filepath} to {output_name} and added the branches : isTest, mse")
 
 def main():
     tree_name = "miniT"
